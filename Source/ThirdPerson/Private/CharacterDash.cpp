@@ -5,6 +5,14 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "TimerManager.h"
 
+// TODO: 
+// - empêcher un autre dash tant que le joueur est en l'air
+// - empêcher un autre dash tant que le joueur est en train de dasher
+// - inverser les axes de déplacement
+// - ajouter un effet de particules
+// - ajouter un son
+// - ajouter un effet de caméra
+
 UCharacterDash::UCharacterDash()
 {
     // Set this component to be initialized when the game starts, and to be ticked every frame
