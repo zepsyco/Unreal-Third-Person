@@ -12,7 +12,7 @@ UCharacterDash::UCharacterDash()
 
     // Initialize default values
     DashDistance = 1000.0f;
-    DashSpeed = 1000.0f;
+    DashSpeed = 500.0f;
     DashCooldown = 2.0f;
     bCanDash = true;
 }
@@ -44,26 +44,28 @@ void UCharacterDash::ResetDash()
 void UCharacterDash::Dash()
 {
     // Obtenir l'acteur propriétaire du composant (peut être un personnage, un véhicule, etc.)
-    AActor* OwnerActor = GetOwner();
-    if (OwnerActor)
+    ACharacter* OwnerCharacter = Cast<ACharacter>(GetOwner());
+    if (OwnerCharacter)
     {
         // Obtenez le contrôleur du propriétaire
-        AController* OwnerController = OwnerActor->GetInstigatorController();
+        AController* OwnerController = OwnerCharacter->GetController();
         if (OwnerController)
         {
             // Obtenez le mouvement du propriétaire (peut être le mouvement d'un personnage, d'un véhicule, etc.)
-            UCharacterMovementComponent* OwnerMovement = OwnerActor->FindComponentByClass<UCharacterMovementComponent>();
+            UCharacterMovementComponent* OwnerMovement = OwnerCharacter->GetCharacterMovement();
             if (OwnerMovement)
             {
                 // Obtenez la direction de Dash
-                FVector DashDirection = OwnerActor->GetActorForwardVector() * DashDistance;
+                FVector ForwardVector = OwnerCharacter->GetActorForwardVector();
 
-                // Obtenez la position après Dash
-                FVector DashLocation = OwnerActor->GetActorLocation() + DashDirection;
+                FVector DashDirection = FVector(0.f, ForwardVector.Y, ForwardVector.Z);
+                DashDirection.Normalize();
 
-                // Déplacez l'acteur vers la nouvelle position
-                OwnerController->SetControlRotation(DashDirection.Rotation());
-                OwnerActor->SetActorLocation(DashLocation);
+                // Calculez la vélocité en fonction de la direction et de la vitesse de dash
+                FVector DashVelocity = DashDirection * DashSpeed;
+
+                // Appliquez une impulsion au personnage
+                OwnerCharacter->LaunchCharacter(DashVelocity, true, true);
 
                 // Ajustez la vitesse de déplacement si nécessaire
                 OwnerMovement->MaxWalkSpeed = DashSpeed;

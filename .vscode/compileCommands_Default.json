@@ -1,0 +1,74 @@
+[
+	{
+		"file": "F:\\Download\\Unreal-Third-Person\\Source\\ThirdPerson\\Private\\CharacterDash.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@F:\\Download\\Unreal-Third-Person\\.vscode\\compileCommands_Default\\ThirdPerson.1.rsp"
+		],
+		"directory": "C:\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "F:\\Download\\Unreal-Third-Person\\Source\\ThirdPerson\\Public\\CharacterDash.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@F:\\Download\\Unreal-Third-Person\\.vscode\\compileCommands_Default\\ThirdPerson.1.rsp"
+		],
+		"directory": "C:\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "F:\\Download\\Unreal-Third-Person\\Source\\ThirdPerson\\ThirdPerson.Build.cs",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@F:\\Download\\Unreal-Third-Person\\.vscode\\compileCommands_Default\\ThirdPerson.1.rsp"
+		],
+		"directory": "C:\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "F:\\Download\\Unreal-Third-Person\\Source\\ThirdPerson\\ThirdPerson.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@F:\\Download\\Unreal-Third-Person\\.vscode\\compileCommands_Default\\ThirdPerson.1.rsp"
+		],
+		"directory": "C:\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "F:\\Download\\Unreal-Third-Person\\Source\\ThirdPerson\\ThirdPerson.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@F:\\Download\\Unreal-Third-Person\\.vscode\\compileCommands_Default\\ThirdPerson.1.rsp"
+		],
+		"directory": "C:\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "F:\\Download\\Unreal-Third-Person\\Source\\ThirdPerson\\ThirdPersonCharacter.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@F:\\Download\\Unreal-Third-Person\\.vscode\\compileCommands_Default\\ThirdPerson.1.rsp"
+		],
+		"directory": "C:\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "F:\\Download\\Unreal-Third-Person\\Source\\ThirdPerson\\ThirdPersonCharacter.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@F:\\Download\\Unreal-Third-Person\\.vscode\\compileCommands_Default\\ThirdPerson.1.rsp"
+		],
+		"directory": "C:\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "F:\\Download\\Unreal-Third-Person\\Source\\ThirdPerson\\ThirdPersonGameMode.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@F:\\Download\\Unreal-Third-Person\\.vscode\\compileCommands_Default\\ThirdPerson.1.rsp"
+		],
+		"directory": "C:\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "F:\\Download\\Unreal-Third-Person\\Source\\ThirdPerson\\ThirdPersonGameMode.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@F:\\Download\\Unreal-Third-Person\\.vscode\\compileCommands_Default\\ThirdPerson.1.rsp"
+		],
+		"directory": "C:\\UE_5.3\\Engine\\Source"
+	}
+]

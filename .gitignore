@@ -1,5 +1,7 @@
 # Visual Studio 2015 user specific files
 .vs/
+.vscode/
+*.rsp
 
 # Compiled Object files
 *.slo
@@ -51,6 +53,7 @@ Plugins/*/Binaries/*
 
 # Builds
 Build/*
+Build/**/
 
 # Whitelist PakBlacklist-<BuildConfiguration>.txt files
 !Build/*/
