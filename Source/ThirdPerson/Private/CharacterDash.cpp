@@ -76,7 +76,7 @@ void UCharacterDash::Dash()
                 OwnerCharacter->LaunchCharacter(DashVelocity, true, true);
 
                 // Ajustez la vitesse de déplacement si nécessaire
-                OwnerMovement->MaxWalkSpeed = DashSpeed;
+                //OwnerMovement->MaxWalkSpeed = DashSpeed;
             }
         }
     }

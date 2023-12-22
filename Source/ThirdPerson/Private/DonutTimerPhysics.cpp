@@ -1,37 +1,25 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "DonutTimerPhysics.h"
 
 // Sets default values for this component's properties
 UDonutTimerPhysics::UDonutTimerPhysics()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
+	// Set this component to be initialized when the game starts, and to be ticked every frame.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	//get the mesh as a template to avoid crashing
-	// if (getMesh == nullptr) {
-	// 	getMesh = GetOwner()->FindComponentByClass<UStaticMeshComponent>();
-	// }
-
-	// ...
 }
-
 
 // Called when the game starts
 void UDonutTimerPhysics::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	// Get the mesh as a template to avoid crashing
+	SetMesh();
 }
 
-void UDonutTimerPhysics::SetMesh(UStaticMeshComponent* InMesh)
+void UDonutTimerPhysics::SetMesh()
 {
-	//get the mesh as a template to avoid crashing
-	if (getMesh == nullptr) {
+	// Get the mesh as a template to avoid crashing
+	if (GetOwner() && getMesh == nullptr) {
 		getMesh = GetOwner()->FindComponentByClass<UStaticMeshComponent>();
 	}
 }
@@ -40,34 +28,63 @@ void UDonutTimerPhysics::SetMesh(UStaticMeshComponent* InMesh)
 void UDonutTimerPhysics::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	// Uncomment the following lines if needed for debugging
+	//UE_LOG(LogTemp, Display, TEXT("I am indeed ticking with '%f'"), DeltaTime);
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("'UDonutTimerPhysics::Tick' Ticking with '%f' DeltaTime"), DeltaTime));
 }
 
-void UDonutTimerPhysics::StartDestroy()
+void UDonutTimerPhysics::StartDestroy(AActor* PlayerActor)
 {
-    // each second, decrease the timer by 1
-    // when the timer reaches 0, return the mesh to its original state after 2 seconds
-
-    if (timer > 0) {
-        timer--;
+    if (!PlayerActor || Timer > 0)
+    {
+        return;
     }
-    else {
-        // Disable physics and collisions
-        getMesh->SetSimulatePhysics(false);
-        getMesh->SetEnableGravity(false);
-        getMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-        getMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
 
-        // Schedule the mesh to return to its original state after 2 seconds
-        FTimerHandle TimerHandle;
-        GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UDonutTimerPhysics::ResetMeshState, 2.0f, false);
+    // Set the initial timer value
+    Timer = 2;
+
+    // Schedule the countdown to happen every second
+    GetWorld()->GetTimerManager().SetTimer(CountdownTimerHandle, this, &UDonutTimerPhysics::CountdownTick, 1.0f, true);
+}
+
+void UDonutTimerPhysics::CountdownTick()
+{
+    if (Timer <= 0)
+    {
+        GetWorld()->GetTimerManager().ClearTimer(CountdownTimerHandle);
+        return;
     }
+
+    // Decrease the timer by 1 second each tick
+    Timer--;
+
+    // Display the timer on screen
+    UE_LOG(LogTemp, Warning, TEXT("Timer: %d"), Timer);
 }
 
 void UDonutTimerPhysics::ResetMeshState()
 {
-    // Reset the mesh to its original state
-    getMesh->SetSimulatePhysics(true);
-    getMesh->SetEnableGravity(true);
-    getMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-    getMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Block);
+    if (MeshComponent)
+    {
+        // Reset the mesh to its original state
+        // ...
+
+        // Clear the timer handle
+        GetWorld()->GetTimerManager().ClearTimer(CountdownTimerHandle);
+    }
+}
+
+bool UDonutTimerPhysics::IsOverlappingPlayer(AActor* PlayerActor)
+{
+    if (!PlayerActor)
+    {
+        return false;
+    }
+
+    // Check if the component is currently overlapping with the specified player actor
+    TArray<AActor*> OverlappingActors;
+    GetOwner()->GetOverlappingActors(OverlappingActors, PlayerActor->GetClass());
+
+    return OverlappingActors.Contains(PlayerActor);
 }
