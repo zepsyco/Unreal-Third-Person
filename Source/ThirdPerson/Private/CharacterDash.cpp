@@ -19,9 +19,9 @@ UCharacterDash::UCharacterDash()
     PrimaryComponentTick.bCanEverTick = false;
 
     // Initialize default values
-    DashDistance = 1000.0f;
-    DashSpeed = 500.0f;
-    DashCooldown = 2.0f;
+    DashDistance = 0.f;
+    DashSpeed = 0.f;
+    DashCooldown = .1f;
     bCanDash = true;
 }
 

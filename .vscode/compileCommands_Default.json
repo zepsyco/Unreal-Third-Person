@@ -8,7 +8,23 @@
 		"directory": "C:\\UE_5.3\\Engine\\Source"
 	},
 	{
+		"file": "F:\\Download\\Unreal-Third-Person\\Source\\ThirdPerson\\Private\\DonutTimerPhysics.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@F:\\Download\\Unreal-Third-Person\\.vscode\\compileCommands_Default\\ThirdPerson.1.rsp"
+		],
+		"directory": "C:\\UE_5.3\\Engine\\Source"
+	},
+	{
 		"file": "F:\\Download\\Unreal-Third-Person\\Source\\ThirdPerson\\Public\\CharacterDash.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@F:\\Download\\Unreal-Third-Person\\.vscode\\compileCommands_Default\\ThirdPerson.1.rsp"
+		],
+		"directory": "C:\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "F:\\Download\\Unreal-Third-Person\\Source\\ThirdPerson\\Public\\DonutTimerPhysics.h",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
 			"@F:\\Download\\Unreal-Third-Person\\.vscode\\compileCommands_Default\\ThirdPerson.1.rsp"
