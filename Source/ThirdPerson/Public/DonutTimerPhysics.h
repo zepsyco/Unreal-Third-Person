@@ -13,14 +13,17 @@ class THIRDPERSON_API UDonutTimerPhysics : public UActorComponent
 	GENERATED_BODY()
 
 private:
+
 	int32 Timer;
+	int32 actionTimer;
 	FTimerHandle CountdownTimerHandle;
     FTimerHandle ResetMeshTimerHandle;
 	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Donut Timer Physics")
     UStaticMeshComponent* getMesh = nullptr;
 
 protected:
+
 	// Pointer to the mesh component
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Donut Timer Physics")
 	UStaticMeshComponent* MeshComponent;
@@ -29,20 +32,17 @@ public:
 	// Sets default values for this component's properties
 	UDonutTimerPhysics();
 
+	UFUNCTION(BlueprintCallable, Category = "Platform")
+	void InitMesh(UStaticMeshComponent* InitialMesh);
+
 	// Function to start the destruction process
 	UFUNCTION(BlueprintCallable, Category = "Platform")
-	void StartDestroy(AActor* PlayerActor);
+	void CountdownDestroy(int32 Time, int32 Action);
+	void CountdownTick();
+	void ResetMeshState();
 
-	// Function to check if the component is overlapping with a player
 	UFUNCTION(BlueprintCallable, Category = "MyActor Functions")
 	bool IsOverlappingPlayer(AActor* PlayerActor);
-
-	// Function to be called on each tick of the countdown timer
-	void CountdownTick();
-
-	// Function to reset the mesh state
-	UFUNCTION(BlueprintCallable, Category = "Platform")
-	void ResetMeshState();
 
 protected:
 	// Called when the game starts

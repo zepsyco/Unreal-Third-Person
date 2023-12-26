@@ -7,6 +7,10 @@ UDonutTimerPhysics::UDonutTimerPhysics()
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
+void UDonutTimerPhysics::InitMesh(UStaticMeshComponent* InitialMesh)
+{
+    getMesh = InitialMesh;
+}
 // Called when the game starts
 void UDonutTimerPhysics::BeginPlay()
 {
@@ -28,51 +32,38 @@ void UDonutTimerPhysics::SetMesh()
 void UDonutTimerPhysics::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// Uncomment the following lines if needed for debugging
-	//UE_LOG(LogTemp, Display, TEXT("I am indeed ticking with '%f'"), DeltaTime);
-	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("'UDonutTimerPhysics::Tick' Ticking with '%f' DeltaTime"), DeltaTime));
 }
 
-void UDonutTimerPhysics::StartDestroy(AActor* PlayerActor)
+void UDonutTimerPhysics::CountdownDestroy(int32 Time, int32 Action)
 {
-    if (!PlayerActor || Timer > 0)
-    {
-        return;
-    }
-
-    // Set the initial timer value
-    Timer = 2;
+    Timer = Time, actionTimer = Action;
 
     // Schedule the countdown to happen every second
     GetWorld()->GetTimerManager().SetTimer(CountdownTimerHandle, this, &UDonutTimerPhysics::CountdownTick, 1.0f, true);
 }
 
-void UDonutTimerPhysics::CountdownTick()
-{
-    if (Timer <= 0)
-    {
-        GetWorld()->GetTimerManager().ClearTimer(CountdownTimerHandle);
-        return;
-    }
-
-    // Decrease the timer by 1 second each tick
-    Timer--;
-
-    // Display the timer on screen
-    UE_LOG(LogTemp, Warning, TEXT("Timer: %d"), Timer);
-}
-
 void UDonutTimerPhysics::ResetMeshState()
 {
-    if (MeshComponent)
-    {
-        // Reset the mesh to its original state
-        // ...
+    // Clear the timer handle
+    GetWorld()->GetTimerManager().ClearTimer(CountdownTimerHandle);
+    getMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+    getMesh->SetVisibility(true);
+}
 
-        // Clear the timer handle
-        GetWorld()->GetTimerManager().ClearTimer(CountdownTimerHandle);
+void UDonutTimerPhysics::CountdownTick()
+{
+    Timer--;
+
+    if (Timer <= 0 && getMesh) {
+        ResetMeshState();
     }
+    if (Timer == actionTimer && getMesh)
+    {
+        getMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        getMesh->SetVisibility(false);
+    }
+
+    //GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("'UDonutTimerPhysics::CountdownTick' Timer is '%d'"), Timer));
 }
 
 bool UDonutTimerPhysics::IsOverlappingPlayer(AActor* PlayerActor)
