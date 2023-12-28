@@ -19,10 +19,7 @@ protected:
     // Called when the game starts
     virtual void BeginPlay() override;
 
-public:    
-    // Distance du Dash
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dash")
-    float DashDistance;
+public:
 
     // Vitesse du Dash
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dash")
@@ -31,24 +28,21 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dash")
     float DashUpwardSpeed;
 
-    // Temps de recharge du Dash
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dash")
-    float DashCooldown;
-
     // Fonction pour déclencher le Dash
     UFUNCTION(BlueprintCallable, Category = "Dash")
-    void StartDash();
+    void StartDash(int32 playerDashSpeed);
 
 private:
  	
 	FTimerHandle DashCooldownTimerHandle;
     
 	// Gérer l'état du Dash
-    bool bCanDash;
+    bool bCanDash = true;
 
     // Fonction pour effectuer le Dash
     void Dash();
 
     // Fonction pour réinitialiser le Dash après le temps de recharge
+    UFUNCTION(BlueprintCallable, Category = "Dash")
     void ResetDash();
 };

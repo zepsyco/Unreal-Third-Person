@@ -6,9 +6,6 @@
 #include "TimerManager.h"
 
 // TODO: 
-// - empêcher un autre dash tant que le joueur est en l'air
-// - empêcher un autre dash tant que le joueur est en train de dasher
-// - inverser les axes de déplacement
 // - ajouter un effet de particules
 // - ajouter un son
 // - ajouter un effet de caméra
@@ -17,12 +14,6 @@ UCharacterDash::UCharacterDash()
 {
     // Set this component to be initialized when the game starts, and to be ticked every frame
     PrimaryComponentTick.bCanEverTick = false;
-
-    // Initialize default values
-    DashDistance = 0.f;
-    DashSpeed = 0.f;
-    DashCooldown = .1f;
-    bCanDash = true;
 }
 
 void UCharacterDash::BeginPlay()
@@ -32,15 +23,14 @@ void UCharacterDash::BeginPlay()
     // ...
 }
 
-void UCharacterDash::StartDash()
+void UCharacterDash::StartDash(int32 playerDashSpeed)
 {
+    DashSpeed = playerDashSpeed;
+
     if (bCanDash)
     {
         bCanDash = false;
-        // Appeler votre fonction de dash ici
         Dash();
-        // Démarrez un minuteur pour le temps de recharge
-        GetWorld()->GetTimerManager().SetTimer(DashCooldownTimerHandle, this, &UCharacterDash::ResetDash, DashCooldown, false);
     }
 }
 
