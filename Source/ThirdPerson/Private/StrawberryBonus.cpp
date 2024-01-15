@@ -58,7 +58,7 @@ void UStrawberryBonus::FlyUp(UStaticMeshComponent* FruitMesh, float Seconds)
     static float Timer = 0.f;
 	
 	//if mesh is over a certain height, it cant go higher
-	if (FruitMesh->GetComponentLocation().Z > 1000.f)
+	if (FruitMesh->GetComponentLocation().Z > 1000000.f)
 		return;
 
     if (!bOnce)

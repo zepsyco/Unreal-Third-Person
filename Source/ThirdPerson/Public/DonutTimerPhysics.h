@@ -14,8 +14,10 @@ class THIRDPERSON_API UDonutTimerPhysics : public UActorComponent
 
 private:
 
-	int32 Timer;
-	int32 actionTimer;
+	float Timer;
+	float actionTimer;
+	float Precision = 0.01f;
+	
 	FTimerHandle CountdownTimerHandle;
     FTimerHandle ResetMeshTimerHandle;
 	
@@ -37,7 +39,7 @@ public:
 
 	// Function to start the destruction process
 	UFUNCTION(BlueprintCallable, Category = "Platform")
-	void CountdownDestroy(int32 Time, int32 Action);
+	void CountdownDestroy(float Time, float Action);
 	void CountdownTick();
 	void ResetMeshState();
 

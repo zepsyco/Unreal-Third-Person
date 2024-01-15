@@ -34,12 +34,13 @@ void UDonutTimerPhysics::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
-void UDonutTimerPhysics::CountdownDestroy(int32 Time, int32 Action)
+void UDonutTimerPhysics::CountdownDestroy(float Time, float Action)
 {
-    Timer = Time, actionTimer = Action;
+    Timer = Time;
+    actionTimer = Action;
 
-    // Schedule the countdown to happen every second
-    GetWorld()->GetTimerManager().SetTimer(CountdownTimerHandle, this, &UDonutTimerPhysics::CountdownTick, 1.0f, true);
+    // Schedule the countdown to happen every 0.1 second
+    GetWorld()->GetTimerManager().SetTimer(CountdownTimerHandle, this, &UDonutTimerPhysics::CountdownTick, 0.1f, true);
 }
 
 void UDonutTimerPhysics::ResetMeshState()
@@ -52,18 +53,18 @@ void UDonutTimerPhysics::ResetMeshState()
 
 void UDonutTimerPhysics::CountdownTick()
 {
-    Timer--;
+    Timer -= 0.1f; // Utilisez la même valeur de délai que celle que vous avez spécifiée dans SetTimer
 
     if (Timer <= 0 && getMesh) {
         ResetMeshState();
     }
-    if (Timer == actionTimer && getMesh)
+    if (FMath::IsNearlyEqual(Timer, actionTimer, Precision) && getMesh)
     {
         getMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
         getMesh->SetVisibility(false);
     }
 
-    //GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("'UDonutTimerPhysics::CountdownTick' Timer is '%d'"), Timer));
+    //GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("'UDonutTimerPhysics::CountdownTick' Timer is '%f'"), Timer));
 }
 
 bool UDonutTimerPhysics::IsOverlappingPlayer(AActor* PlayerActor)
